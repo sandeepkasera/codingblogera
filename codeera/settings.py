@@ -31,7 +31,7 @@ SECRET_KEY=env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['code-era.herokuapp.com']
+ALLOWED_HOSTS = ['codingblogera.herokuapp.com']
 
 LOGIN_URL = "/login"
 
