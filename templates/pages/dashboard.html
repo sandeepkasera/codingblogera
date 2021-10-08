@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block head_title %}
+Dashboard!
+{% endblock head_title%}
+{% block content %}
+
+<div class="row text-center">
+    <div class="col">
+        <h1>Welcome to Code era</h1>
+        <h6>Welcome {{request.user}}</h6> 
+    </div>
+
+</div>
+
+<div class="row mb-3">
+    <div class='col-md-4 mx-auto col-10'>
+        <form class="form text-center" id='post-create-form' method="POST" action='/dashboard/'>
+            {% csrf_token %}
+            <input type='text' class='form-control' name='title' placeholder="title...">
+            <textarea required class='form-control my-2' name='content' placeholder='New Post...'></textarea>
+            <button type='submit' class='btn btn-success '>POST</button>
+        </form>
+    </div>
+
+</div>
+
+<h3>My Posts</h3>
+<div class="row" id='posts'>
+    {% for q in qs %}
+    <div class='mb-4 col-12 col-md-10 mx-auto'><strong>{{ q.title}}</strong></div>
+    <div class='mb-4 col-12 col-md-10 mx-auto border rounded py-3  post' id = 'post-"{{q.id }}"'><p>{{ q.content}}</p>
+   
+            <div><i class="bi bi-hand-thumbs-up-fill"></i></div>
+
+                <form class="form" id='post-create-form' method="POST" action='/dashboard/'>
+                    {% csrf_token %}
+                    <input type='hidden' value='{{q.id }}' name='p_id'>
+                    <div class="dropdown">
+                        <button class="btn btn-light dropdown-toggle mx-4" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"></button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li><button name="opt" type='submit' class='bg-white text-dark w-100 border-light' value="delete">Delete</button></li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+        <p>Posted On: {{q.timestamp}}</p>
+    {% endfor %}
+    </div>
+</div>
+
+<script>
+
+
+
+</script>
+
+{% endblock content %}
